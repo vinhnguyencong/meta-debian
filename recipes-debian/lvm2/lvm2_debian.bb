@@ -39,14 +39,14 @@ EXTRA_OECONF += " \
 	--disable-blkdeactivate \
 "
 
-PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)}"
+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)}"
 PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux,"
 
 DEVMAPPER_ABINAME = "1.02.1"
 EXTRA_OEMAKE += "LIB_VERSION_DM=${DEVMAPPER_ABINAME}"
 
 do_install_append(){
-	if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+	if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
 		oe_runmake 'DESTDIR=${D}' install_systemd_units
 		ln -sf lvm2-activation.service ${D}${systemd_unitdir}/system/lvm2.service
 	fi

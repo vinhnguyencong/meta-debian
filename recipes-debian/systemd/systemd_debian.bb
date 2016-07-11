@@ -26,7 +26,7 @@ DEPENDS = "intltool-native \
            libgcrypt \
            kmod \
            util-linux \
-           ${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)} \
+           ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)} \
           "
 
 # These options are almost same as CONFFLAGS in debian/rules.
@@ -50,7 +50,7 @@ DEBIAN_CONFOPTS = "--with-rootprefix=${base_prefix} \
 # --enable-dependency-tracking:
 #   avoid compile error "Cannot open src/*/org.freedesktop.*.policy"
 EXTRA_OECONF = "${DEBIAN_CONFOPTS} \
-                ${@base_contains('DISTRO_FEATURES', 'pam', '--enable-pam', '--disable-pam', d)} \
+                ${@bb.utils.contains('DISTRO_FEATURES', 'pam', '--enable-pam', '--disable-pam', d)} \
                 --disable-manpages \
                 --disable-gtk-doc-html \
                 --enable-dependency-tracking \
@@ -192,7 +192,7 @@ do_install_append() {
 #   systemd-sysv: links and manuals for replacing sysvinit
 PACKAGES =+ "libsystemd-dev \
              libsystemd0 \
-             ${@base_contains('DISTRO_FEATURES', 'pam', 'libpam-systemd', '', d)} \
+             ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam-systemd', '', d)} \
              udev \
              libudev-dev \
              libudev1 \
@@ -208,7 +208,7 @@ FILES_${PN} = "${base_bindir} \
                ${datadir} \
                ${sysconfdir}/dbus-1 \
                ${sysconfdir}/modules-load.d/modules.conf \
-               ${@base_contains('DISTRO_FEATURES', 'pam', '${sysconfdir}/pam.d/systemd-user', '', d)} \
+               ${@bb.utils.contains('DISTRO_FEATURES', 'pam', '${sysconfdir}/pam.d/systemd-user', '', d)} \
                ${sysconfdir}/sysctl.d/99-sysctl.conf \
                ${sysconfdir}/systemd \
                ${sysconfdir}/xdg \
@@ -216,7 +216,7 @@ FILES_${PN} = "${base_bindir} \
 FILES_${PN}-dbg += "${base_libdir}/systemd/.debug \
                     ${base_libdir}/systemd/system-generators/.debug \
                     ${base_libdir}/udev/.debug \
-                    ${@base_contains('DISTRO_FEATURES', 'pam', '${base_libdir}/security/.debug/pam_systemd.so', '', d)} \
+                    ${@bb.utils.contains('DISTRO_FEATURES', 'pam', '${base_libdir}/security/.debug/pam_systemd.so', '', d)} \
                    "
 FILES_${PN}-dev = ""
 ALLOW_EMPTY_${PN}-dev = "1"
