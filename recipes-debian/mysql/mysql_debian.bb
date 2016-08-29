@@ -126,4 +126,4 @@ RDEPENDS_libmysqlclient += "mysql-common"
 RDEPENDS_${PN} += "\
 	mysql-common debianutils "
 RDEPENDS_mysql-server += "\
-	passwd psmisc mysql-server-core ${PN} initscripts lsb-base"
+	passwd psmisc mysql-server-core ${PN} sysvinit-initscripts lsb-base"
