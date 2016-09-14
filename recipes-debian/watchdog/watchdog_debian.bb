@@ -23,8 +23,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=ecc0551bf54ad97f6b541720f84d6569"
 #	this patch is correct the path to watchdog-conf file
 #watchdog-conf.patch:
 #	declare path for watchdog-device	
-SRC_URI += "file://fixsepbuild.patch \
-	   file://watchdog-conf.patch"
+SRC_URI += "file://fixsepbuild.patch"
 
 inherit autotools
 
@@ -54,8 +53,9 @@ do_install_append() {
 	install -m 0644 ${S}/debian/wd_keepalive.service ${D}${base_libdir}/systemd/system/
 	
 	#Install /etc/init.d/watchdog and wd_keepalive
-	install -m 0644 ${S}/debian/init ${D}${sysconfdir}/init.d/watchdog
-	install -m 0644 ${S}/debian/wd_keepalive.init ${D}${sysconfdir}/init.d/wd_keepalive
-		 
-	install -D ${S}/redhat/watchdog.init ${D}/${sysconfdir}/init.d/watchdog.sh
+	install -m 0755 ${S}/debian/init ${D}${sysconfdir}/init.d/watchdog
+	install -m 0755 ${S}/debian/wd_keepalive.init ${D}${sysconfdir}/init.d/wd_keepalive
+
+	install -d ${D}${sysconfdir}/default/
+	install -m 0644 ${S}/debian/watchdog.default ${D}${sysconfdir}/default/watchdog
 }
