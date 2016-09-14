@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = " \
 "
 
 DEPENDS = "libtirpc"
-RDEPENDS_${PN} = "lsb-base"
+RDEPENDS_${PN} = "lsb-base insserv"
 
 inherit autotools pkgconfig
 
