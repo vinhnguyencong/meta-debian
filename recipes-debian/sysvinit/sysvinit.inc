@@ -47,11 +47,11 @@ do_install () {
 	install -d  ${D}/sys
 	
 	# Install files for sysvinit-utils package follow debian/rules
-	if [ ! -d ${D}${base-libdir}/init ]; then
+	if [ ! -d ${D}${base_libdir}/init ]; then
 		install -d ${D}${base_libdir}/init
 	fi
 	install ${S}/debian/init-d-script ${D}${base_libdir}/init
-	install ${S}/debian/service/service ${D}${base_sbindir}
+	install ${S}/debian/service/service ${D}${sbindir}
 		
 	install -d ${D}${base_libdir}/${DPN}
 	install -m 0755 ${D}${base_sbindir}/init ${D}${base_libdir}/${DPN}

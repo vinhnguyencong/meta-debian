@@ -38,7 +38,10 @@ FILES_${PN}-initscripts += " \
 		${sysconfdir}/default/* \
 		${sysconfdir}/init.d/* \
 		${sysconfdir}/network \
-		${base_libdir}/init/* \
+		${base_libdir}/init/bootclean.sh \
+		${base_libdir}/init/mount-functions.sh \
+		${base_libdir}/init/swap-functions.sh \
+		${base_libdir}/init/tmpfs.sh \
 		run sys \
 		${base_sbindir}/fsck.nfs \
 		${localstatedir}${base_libdir}/initscripts \
@@ -71,12 +74,16 @@ FILES_${PN}-utils += " \
 		${base_bindir}/pidof* \
 		${base_libdir}/init/init-d-script \
 		${base_sbindir}/fstab-decode \
-		${base_sbindir}/killall5 \
-		${base_sbindir}/sulogin \
+		${base_sbindir}/killall5* \
+		${base_sbindir}/sulogin* \
 		${bindir}/last \
 		${bindir}/lastb \
 		${bindir}/mesg \
+		${base_libdir}/init/vars.sh \
 		${sbindir}/service"
+# Move vars.sh file from initscript to sysvinit-utils
+# refer 0dac2bb4a4f412bf011dfdc0809dace04ad3d399 commit
+
 FILES_${PN}-utils-doc += " \
 		${datardir}/man/man1/last.1 \
 		${datardir}/man/man1/lastb.1 \
